@@ -23,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-Br">
+    <html lang="pt-Br" className="tw-bg-black tw-w-full">
       <body
         className={`${inter.variable} antialiased`}
       >

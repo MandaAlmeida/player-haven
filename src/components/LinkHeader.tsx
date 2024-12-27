@@ -13,6 +13,6 @@ export default function LinkHeader({ text, link }: LinkProps) {
 
     const isActive = pathname === link;
     return (
-        <Link className={`text-sm font-bold text ${isActive ? "text-white underline" : " text-gray-300"}`} href={link}>{text}</Link>
+        <Link className={`tw-text-sm tw-font-bold  ${isActive ? "tw-text-white tw-underline" : "tw-no-underline tw-text-gray-300"}`} href={link}>{text}</Link>
     );
 }
