@@ -1,36 +1,69 @@
+'use client'
 import LeagueofLegends from "@/assets/LeagueofLegends.jpg";
 import Fortnite from "@/assets/fortnite.jpg";
 import CallofDuty from "@/assets/CallofDuty.jpg"
-import { Carousel, CarouselItem, CarouselCaption } from 'react-bootstrap';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import { Autoplay, Navigation, Pagination, EffectCreative } from 'swiper/modules';
 import Image from 'next/image';
-import 'bootstrap/dist/css/bootstrap.css';
+import Link from "next/link";
 
 export function Carrossel() {
+    const items = [
+        {
+            image: CallofDuty,
+            title: "Call of Duty",
+            text: "Jogo de estratégia em que duas equipes de cinco poderosos Campeões se enfrentam para destruir a base uma da outra. Escolha entre mais de 140 Campeões para realizar jogadas épicas, assegurar abates e destruir torres conforme você luta até a vitória."
+        },
+        {
+            image: LeagueofLegends,
+            title: "League of Legends",
+            text: "Jogo de estratégia em que duas equipes de cinco poderosos Campeões se enfrentam para destruir a base uma da outra. Escolha entre mais de 140 Campeões para realizar jogadas épicas, assegurar abates e destruir torres conforme você luta até a vitória."
+        },
+        {
+            image: Fortnite,
+            title: "Fortnite",
+            text: "Jogo de estratégia em que duas equipes de cinco poderosos Campeões se enfrentam para destruir a base uma da outra. Escolha entre mais de 140 Campeões para realizar jogadas épicas, assegurar abates e destruir torres conforme você luta até a vitória."
+        },
+    ]
+
+
     return (
-        <Carousel indicators={false} pause={'hover'} controls={false}>
-            <CarouselItem className="tw-bg-black">
-                <Image src={LeagueofLegends} alt="Imagem" className="tw-opacity-70 tw-h-[100vh] tw-max-h-[900px] tw-object-cover" />
-                <CarouselCaption className="tw-top-[50%] tw-translate-y-[-50%] tw-flex tw-justify-center tw-flex-col">
-                    <h3>League of Legends</h3>
-                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                </CarouselCaption>
-            </CarouselItem>
-            <CarouselItem className="tw-bg-black">
-                <Image src={Fortnite} alt="Imagem" className="tw-opacity-70 tw-h-[100vh] tw-max-h-[900px] tw-object-cover" />
-                <CarouselCaption className="tw-top-[50%] tw-translate-y-[-50%] tw-flex tw-justify-center tw-flex-col">
-                    <h3>Fortnite</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                </CarouselCaption>
-            </CarouselItem>
-            <CarouselItem className="tw-bg-black">
-                <Image src={CallofDuty} alt="Imagem" className="tw-opacity-70 tw-h-[100vh] tw-max-h-[900px] tw-object-cover" />
-                <CarouselCaption className="tw-top-[50%] tw-translate-y-[-50%] tw-flex tw-justify-center tw-flex-col">
-                    <h3>Call of Duty</h3>
-                    <p>
-                        Praesent commodo cursus magna, vel scelerisque nisl consectetur
-                    </p>
-                </CarouselCaption>
-            </CarouselItem>
-        </Carousel >
+        <Swiper
+            spaceBetween={30}
+            centeredSlides={true}
+            autoplay={{
+                delay: 2500,
+                disableOnInteraction: false,
+            }}
+            pagination={{
+                clickable: true,
+            }}
+            navigation={true}
+            grabCursor={true}
+            effect={'creative'}
+            creativeEffect={{
+                prev: {
+                    shadow: true,
+                    translate: [0, 0, -400],
+                },
+                next: {
+                    translate: ['100%', 0, 0],
+                },
+            }}
+            modules={[Autoplay, Pagination, Navigation, EffectCreative]}
+        >
+            {items.map((item, index) => (
+                <SwiperSlide key={index} className="bg-black">
+                    <Image src={item.image} alt="Imagem" className="opacity-50 h-[100vh] max-h-[900px] object-cover" />
+                    <section className="absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] flex justify-center gap-10 flex-col items-center text-gray-200 text-center">
+                        <h3 className="text-[50px] font-bold">{item.title}</h3>
+                        <p className="text-lg max-w-4xl">{item.text}</p>
+                        <Link href={"#"} className="text-xl hover:text-white underline">Saiba mais</Link>
+                    </section>
+                </SwiperSlide>
+            ))}
+            <div className="absolute bg-custom-gradient-bottom w-full h-[100px] bottom-0 z-50"></div>
+        </Swiper>
     );
 }

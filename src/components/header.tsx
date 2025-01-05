@@ -13,19 +13,19 @@ export default function Header() {
     const pathname = usePathname();
 
     return (
-        <header className={`tw-flex tw-justify-between tw-items-center tw-fixed tw-top-0 tw-z-50 tw-w-full ${pathname === "/" ? "tw-bg-custom-gradient" : "tw-bg-transparent"}  tw-px-16 tw-h-20`}>
-            <Link href={"/"}><Image src={Logo} alt="Logo da pagina" /></Link>
-            <nav className="tw-flex tw-gap-5">
+        <header className={`flex justify-between items-center fixed top-0 z-50 w-full ${pathname === "/" ? "bg-custom-gradient" : "bg-black"}  px-16 py-5 h-20`}>
+            <Link href={"/"}><Image src={Logo} alt="Logo da pagina" className="w-28" /></Link>
+            <nav className="flex gap-5">
                 <LinkHeader link={"/"} text="Inicio" />
                 <LinkHeader link={"/games"} text="Jogos" />
                 <LinkHeader link={"/booming"} text="Bombando" />
                 <LinkHeader link={"/myGames"} text="Meus Jogos" />
                 <LinkHeader link={"/about"} text="Sobre" />
             </nav>
-            <ul className="tw-text-gray-300 tw-flex tw-items-center tw-gap-5">
-                <li className="tw-flex tw-items-center"><button><Search /></button></li>
-                <li className="tw-w-6 tw-h-6"><button><Bell /></button></li>
-                <li><button className="tw-flex tw-items-center tw-gap-3"><Image src={User} alt="Foto do usuario" className="tw-w-10 tw-h-10" /><ChevronDown /></button></li>
+            <ul className="text-gray-300 flex items-center gap-5">
+                <li className="flex items-center"><button><Search /></button></li>
+                <li className="w-6 h-6"><button><Bell /></button></li>
+                <li><button className="flex items-center gap-3"><Image src={User} alt="Foto do usuario" className="w-10 h-10" /><ChevronDown /></button></li>
             </ul>
         </header>
     )

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
+import "@/styles/globals.css";
 
 const inter = Inter({
   weight: "400",
@@ -23,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-Br" className="tw-bg-black tw-w-full">
+    <html lang="pt-Br" className="bg-black w-full">
       <body
         className={`${inter.variable} antialiased`}
       >

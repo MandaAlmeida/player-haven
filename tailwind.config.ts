@@ -1,7 +1,6 @@
 import type { Config } from "tailwindcss";
 
 export default {
-  prefix: "tw-",
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -35,6 +34,7 @@ export default {
       },
       backgroundImage: {
         'custom-gradient': 'linear-gradient(180deg, rgba(0, 0, 0, 0.7) 10%, transparent)',
+        'custom-gradient-bottom': 'linear-gradient(180deg, transparent, rgba(0, 0, 0, 1) 76%)',
       }
     },
   },
