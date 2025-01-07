@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <main>
       <Carrossel />
-      <ListGames />
+      <ListGames text="Jogos Recomendados" />
     </main>
   );
 }

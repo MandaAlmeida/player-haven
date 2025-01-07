@@ -9,7 +9,11 @@ import SwiperCore from 'swiper';
 import Image from 'next/image';
 import { useRef } from "react";
 
-export function ListGames() {
+type ListGamesType = {
+    text: string
+}
+
+export function ListGames({ text }: ListGamesType) {
     const swiperRef = useRef<SwiperCore | null>(null);
     const items = [
         {
@@ -41,7 +45,7 @@ export function ListGames() {
     return (
         <div className="ml-16">
             <section className="text-gray-200 flex gap-5 items-center text-2xl font-bold mb-5">
-                <span>Jogos Recomendados</span>
+                <span>{text}</span>
                 <ChevronRight width={24} />
             </section>
             <Swiper

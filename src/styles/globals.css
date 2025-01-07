@@ -20,11 +20,6 @@ body, input, textarea, button, a {
     width: 230px !important;
 }
 
-.listGames .swiper-button-prev::after{
-    content: "<";
-    color: white
-}
-
 .listGames .swiper-button-next,
 .listGames .swiper-button-prev{
     position: absolute;
@@ -36,6 +31,7 @@ body, input, textarea, button, a {
     height: 314px;
     top: 0;
     z-index: 100;
+    cursor: pointer;
 }
 
 .listGames .swiper-button-next{
@@ -47,9 +43,25 @@ body, input, textarea, button, a {
     border-radius: 0 10px  10px 0;
 }
 
-.listGames .swiper-button-next::after{
-    content: ">";
-   
-    color: white;
-   
+.listGames .swiper-button-next::after {
+    content: ""; 
+    background-image: url("arrow.svg");
+    background-repeat: no-repeat; 
+    background-size: contain; 
+    background-position: center; 
+    display: block; 
+    width: 40px; 
+    height: 60px; 
+}
+
+.listGames .swiper-button-prev::after {
+    content: ""; 
+    background-image: url("arrow.svg");
+    background-repeat: no-repeat; 
+    background-size: contain; 
+    background-position: center; 
+    display: block; 
+    width: 40px; 
+    height: 60px; 
+    transform: scaleX(-1);
 }
