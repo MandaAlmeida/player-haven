@@ -13,7 +13,7 @@ export default function Header() {
     const pathname = usePathname();
 
     return (
-        <header className={`flex justify-between items-center fixed top-0 z-50 w-full ${pathname === "/" ? "bg-custom-gradient" : "bg-black"}  px-16 py-5 h-20`}>
+        <header className={`flex justify-between items-center  w-full ${pathname === "/" ? "bg-custom-gradient fixed top-0 z-50" : "bg-black"}  px-16 py-5 h-20`}>
             <Link href={"/"}><Image src={Logo} alt="Logo da pagina" className="w-28" /></Link>
             <nav className="flex gap-5">
                 <LinkHeader link={"/"} text="Inicio" />
