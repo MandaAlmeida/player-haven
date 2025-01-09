@@ -1,17 +1,7 @@
-"use client"
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { Game, ListGames } from "@/components/ListGames";
-import Image from "next/image";
+import { ListGames } from "@/components/ListGames";
+
 
 export default function Booming() {
-    const [games, setGames] = useState<Game[]>([]);
-
-    useEffect(() => {
-        axios("https://nlw-ignite-server.vercel.app/games").then((response) => {
-            setGames(response.data);
-        });
-    }, []);
 
     return (
         <main className="p-[60px] pr-0">

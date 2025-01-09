@@ -1,7 +1,8 @@
 "use client"
 import { ChevronRight } from "lucide-react";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { TransactionsContext } from '@/contexts/TransactionsContext';
+import { useContextSelector } from 'use-context-selector';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import Image from 'next/image';
@@ -17,15 +18,13 @@ export interface Game {
 }
 
 export function ListGames({ text }: ListGamesType) {
-    const [games, setGames] = useState<Game[]>([]);
+    const formatBoxArtUrl = (url: string, width: number, height: number): string => {
+        return url.replace('{width}', String(width)).replace('{height}', String(height));
+    };
 
-
-    useEffect(() => {
-        axios("https://nlw-ignite-server.vercel.app/games").then((response) => {
-            setGames(response.data);
-        });
-    }, []);
-
+    const gamesTop = useContextSelector(TransactionsContext,
+        (context) => context.topGames
+    );
 
     return (
         <div>
@@ -51,10 +50,10 @@ export function ListGames({ text }: ListGamesType) {
                 className="listGames p-0 m-0"
             >
 
-                {games.map((game, index) => (
+                {gamesTop.map((game, index) => (
                     <SwiperSlide key={index}>
                         <button className="w-[230px] h-[314px] rounded-xl"><Image key={game.id}
-                            src={game.bannerUrl}
+                            src={formatBoxArtUrl(game.box_art_url, 230, 314)}
                             alt="Imagem" className="rounded-xl border-gray-800 border" width={230}
                             height={314} /></button>
                     </SwiperSlide>
