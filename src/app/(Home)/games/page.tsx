@@ -1,7 +1,7 @@
 "use client"
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Game } from "@/components/ListGames";
+import { Game } from "@/components/listGames";
 import Image from "next/image";
 
 export default function Games() {

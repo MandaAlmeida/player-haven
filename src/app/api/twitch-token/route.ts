@@ -9,7 +9,7 @@ export async function POST() {
             grant_type: 'client_credentials',
         });
 
-        console.log('Twitch token obtained:', data.access_token); // Verifique se o token está sendo retornado corretamente.
+        console.log('Twitch token obtained:', data.access_token);
 
         return NextResponse.json({ access_token: data.access_token });
     } catch (error: any) {

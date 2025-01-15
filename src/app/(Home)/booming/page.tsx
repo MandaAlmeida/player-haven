@@ -1,4 +1,4 @@
-import { ListGames } from "@/components/ListGames";
+import { ListGames } from "@/components/listGames";
 
 
 export default function Booming() {

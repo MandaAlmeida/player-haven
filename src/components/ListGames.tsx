@@ -1,6 +1,5 @@
 "use client"
 import { ChevronRight } from "lucide-react";
-import { useEffect, useState } from "react";
 import { TransactionsContext } from '@/contexts/TransactionsContext';
 import { useContextSelector } from 'use-context-selector';
 import { Swiper, SwiperSlide } from 'swiper/react';

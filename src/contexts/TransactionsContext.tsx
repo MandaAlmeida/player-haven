@@ -18,8 +18,8 @@ type Game = {
 export const TransactionsContext = createContext({} as TransactionsContextType);
 
 export default function TransactionsProvider({ children }: TransactionsProps) {
-    const [token, setToken] = useState<string | null>(null); // Token da Twitch
-    const [topGames, setTopGames] = useState<Game[]>([]); // Lista de jogos
+    const [token, setToken] = useState<string | null>(null);
+    const [topGames, setTopGames] = useState<Game[]>([]);
     const [error, setError] = useState<string | null>(null);
 
     const fetchToken = useCallback(async () => {
@@ -47,17 +47,21 @@ export default function TransactionsProvider({ children }: TransactionsProps) {
                     Authorization: `Bearer ${token}`,
                 },
             });
+
             if (!response.ok) {
                 throw new Error(`Failed to fetch top games: ${response.statusText}`);
             }
+
             const data = await response.json();
-            console.log(data);
-            setTopGames(data);
-            fetchToken();
+            const filteredGames = data.filter((game: any) => game.name.toLowerCase() !== 'just chatting');
+
+            console.log(filteredGames);
+            setTopGames(filteredGames);
         } catch (err: any) {
             setError(err.message || 'Erro ao obter os jogos');
         }
     }, [token]);
+
 
     useEffect(() => {
         if (!token) {
@@ -65,11 +69,14 @@ export default function TransactionsProvider({ children }: TransactionsProps) {
         }
     }, [token]);
 
+    const [hasFetched, setHasFetched] = useState(false);
+
     useEffect(() => {
-        if (token) {
+        if (!hasFetched && token) {
             fetchTopGames();
+            setHasFetched(true);
         }
-    }, [token]);
+    }, [token, hasFetched]);
 
 
     return (

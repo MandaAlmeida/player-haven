@@ -1,5 +1,5 @@
-import { Carrossel } from "@/components/Carrossel";
-import { ListGames } from "@/components/ListGames";
+import { Carrossel } from "@/components/carrossel";
+import { ListGames } from "@/components/listGames";
 
 export default function Home() {
 
