@@ -6,7 +6,7 @@ import { Search, Bell, ChevronDown } from 'lucide-react';
 import { usePathname } from "next/navigation";
 
 import Image from "next/image";
-import LinkHeader from "./LinkHeader";
+import LinkHeader from "./linkHeader";
 import Link from "next/link";
 
 export default function Header() {

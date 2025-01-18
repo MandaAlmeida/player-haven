@@ -5,6 +5,7 @@ import { useContextSelector } from 'use-context-selector';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import Image from 'next/image';
+import { formatBoxArtUrl } from "@/utils/formatBoxArtUrl";
 
 type ListGamesType = {
     text: string
@@ -17,10 +18,6 @@ export interface Game {
 }
 
 export function ListGames({ text }: ListGamesType) {
-    const formatBoxArtUrl = (url: string, width: number, height: number): string => {
-        return url.replace('{width}', String(width)).replace('{height}', String(height));
-    };
-
     const gamesTop = useContextSelector(TransactionsContext,
         (context) => context.topGames
     );

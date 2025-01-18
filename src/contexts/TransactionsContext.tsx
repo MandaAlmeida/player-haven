@@ -1,15 +1,17 @@
+import { Game } from "@/@types/Games";
 import { ReactNode, useCallback, useEffect, useState } from "react";
 import { createContext } from "use-context-selector";
 
 export interface TransactionsContextType {
-    topGames: Game[]
+    topGames: Games[];
+    games: Game[]
 }
 
 interface TransactionsProps {
     children: ReactNode;
 }
 
-type Game = {
+type Games = {
     id: string;
     name: string;
     box_art_url: string;
@@ -19,8 +21,10 @@ export const TransactionsContext = createContext({} as TransactionsContextType);
 
 export default function TransactionsProvider({ children }: TransactionsProps) {
     const [token, setToken] = useState<string | null>(null);
-    const [topGames, setTopGames] = useState<Game[]>([]);
+    const [games, setGames] = useState<Game[]>([]);
+    const [topGames, setTopGames] = useState<Games[]>([]);
     const [error, setError] = useState<string | null>(null);
+    const [hasFetched, setHasFetched] = useState(false);
 
     const fetchToken = useCallback(async () => {
         try {
@@ -52,15 +56,38 @@ export default function TransactionsProvider({ children }: TransactionsProps) {
                 throw new Error(`Failed to fetch top games: ${response.statusText}`);
             }
 
-            const data = await response.json();
-            const filteredGames = data.filter((game: any) => game.name.toLowerCase() !== 'just chatting');
-
-            console.log(filteredGames);
+            const data: Games[] = await response.json();
+            console.log(data)
+            const filteredGames = data.filter((game) => game.name.toLowerCase() !== 'just chatting' && game.name.toLowerCase() !== 'special events');
             setTopGames(filteredGames);
         } catch (err: any) {
             setError(err.message || 'Erro ao obter os jogos');
         }
     }, [token]);
+
+    const fetchGames = useCallback(async () => {
+        if (!token) return;
+
+        try {
+            const response = await fetch('/api/twitch-games', {
+                method: 'POST',
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            const data: Game[] = await response.json();
+            const gamesWithoutCover = data.filter(game => game.cover?.image_id);
+            console.log(gamesWithoutCover)
+            setGames(gamesWithoutCover);
+
+
+        } catch (err: any) {
+            setError(err.message || 'Erro ao obter os jogos');
+        }
+    }, [token]);
+
 
 
     useEffect(() => {
@@ -69,11 +96,12 @@ export default function TransactionsProvider({ children }: TransactionsProps) {
         }
     }, [token]);
 
-    const [hasFetched, setHasFetched] = useState(false);
+
 
     useEffect(() => {
         if (!hasFetched && token) {
             fetchTopGames();
+            fetchGames();
             setHasFetched(true);
         }
     }, [token, hasFetched]);
@@ -81,7 +109,7 @@ export default function TransactionsProvider({ children }: TransactionsProps) {
 
     return (
         <TransactionsContext.Provider
-            value={{ topGames }}
+            value={{ topGames, games }}
         >
             {children}
         </TransactionsContext.Provider>
